@@ -1,10 +1,11 @@
-# Dallas MMA Boxing - Management System
+# Dallas MMA Boxing - Full Stack Application
 
-A full-stack web application for managing a Dallas MMA Boxing gym, including class management, client registration, payment processing, and release form handling.
+A full-stack web application for Dallas MMA Boxing - a premier martial arts training facility offering Boxing, Muay Thai, MMA, and Brazilian Jiu-Jitsu classes. The system includes class management, client registration, payment processing, and release form handling.
 
 ## Project Overview
 
 This system provides:
+- **Public Website**: Modern React frontend for class information and registration
 - **Class Management**: Create and manage boxing/MMA classes with schedules and pricing
 - **Client Management**: Track client information and memberships
 - **Payment Processing**: Handle payments via Stripe integration
@@ -14,23 +15,30 @@ This system provides:
 
 ```
 dallasmmaboxing/
-├── backend/              # Node.js/Express API
-│   ├── src/
-│   │   ├── config/       # Database and app configuration
-│   │   ├── controllers/  # Request handlers
-│   │   ├── middleware/   # Express middleware
-│   │   ├── models/       # Data models
-│   │   ├── routes/       # API routes
-│   │   └── server.ts     # Main server file
-│   ├── package.json
-│   ├── tsconfig.json
-│   └── README.md         # Backend documentation
-├── render.yaml           # Render deployment configuration
-├── DEPLOYMENT.md         # Deployment guide
+├── backend/              # Node.js/Express API (see backend/README.md)
+├── src/                  # React frontend application
+│   ├── components/       # Reusable UI components
+│   ├── pages/           # Page components
+│   ├── hooks/           # Custom React hooks
+│   ├── types/           # TypeScript type definitions
+│   └── utils/           # Utility functions and constants
+├── public/              # Static assets
+├── dist/                # Production build output
+├── render.yaml          # Backend deployment configuration
+├── vercel.json          # Frontend deployment configuration
 └── README.md            # This file
 ```
 
 ## Tech Stack
+
+### Frontend
+- **Framework**: React 18
+- **Language**: TypeScript
+- **Build Tool**: Vite
+- **Styling**: Tailwind CSS
+- **Routing**: React Router v6
+- **Code Quality**: ESLint, Prettier
+- **Deployment**: Vercel
 
 ### Backend
 - **Runtime**: Node.js 18+
@@ -39,121 +47,146 @@ dallasmmaboxing/
 - **Database**: PostgreSQL
 - **Deployment**: Render
 
-### Future Frontend (TBD)
-- React/Next.js
-- Tailwind CSS
-- Stripe Elements
+## Frontend Structure
+
+```
+src/
+├── components/          # Reusable UI components
+│   ├── Header.tsx
+│   ├── Footer.tsx
+│   ├── Hero.tsx
+│   ├── ClassCard.tsx
+│   └── Schedule.tsx
+├── pages/              # Page components
+│   ├── Home.tsx
+│   ├── Schedule.tsx
+│   ├── Boxing.tsx
+│   ├── MuayThai.tsx
+│   ├── MMA.tsx
+│   ├── BrazilianJiuJitsu.tsx
+│   └── Checkout.tsx
+├── hooks/              # Custom React hooks
+│   └── useMediaQuery.ts
+├── types/              # TypeScript type definitions
+│   └── index.ts
+├── utils/              # Utility functions and constants
+│   ├── constants.ts
+│   └── helpers.ts
+├── App.tsx             # Main application component
+├── main.tsx            # Application entry point
+└── index.css           # Global styles
+```
 
 ## Getting Started
 
 ### Prerequisites
-- Node.js 18 or higher
-- npm or yarn
-- PostgreSQL (optional for local development)
+- Node.js 18+ and npm
+- PostgreSQL (optional for local development with backend)
 
-### Local Development
+### Frontend Development
 
-1. **Clone the repository**
-   ```bash
-   git clone https://github.com/andyprevalsky/dallasmmaboxing.git
-   cd dallasmmaboxing
-   ```
+1. Clone the repository:
+```bash
+git clone https://github.com/andyprevalsky/dallasmmaboxing.git
+cd dallasmmaboxing
+```
 
-2. **Set up backend**
-   ```bash
-   cd backend
-   npm install
-   cp .env.example .env
-   # Edit .env with your configuration
-   ```
+2. Install frontend dependencies:
+```bash
+npm install
+```
 
-3. **Run development server**
-   ```bash
-   npm run dev
-   ```
+3. Create environment variables file:
+```bash
+cp .env.example .env
+```
 
-   The API will be available at `http://localhost:3000`
+4. Run the development server:
+```bash
+npm run dev
+```
 
-4. **Test the API**
-   ```bash
-   curl http://localhost:3000/api/health
-   ```
+The application will open at `http://localhost:3000`
+
+### Backend Development
+
+See [backend/README.md](backend/README.md) for backend setup instructions.
 
 ### Building for Production
 
+Build the frontend:
 ```bash
-cd backend
 npm run build
-npm start
 ```
 
-## API Documentation
-
-### Base URL
-- **Local**: `http://localhost:3000`
-- **Production**: `https://your-app.onrender.com`
-
-### Endpoints
-
-#### Health Check
-```
-GET /api/health
+Preview the production build:
+```bash
+npm run preview
 ```
 
-#### Classes
-```
-GET    /api/classes          # Get all classes
-GET    /api/classes/:id      # Get class by ID
-POST   /api/classes          # Create new class
-PUT    /api/classes/:id      # Update class
-DELETE /api/classes/:id      # Delete class
+### Code Quality
+
+Run ESLint:
+```bash
+npm run lint
 ```
 
-#### Clients
-```
-GET    /api/clients          # Get all clients
-GET    /api/clients/:id      # Get client by ID
-POST   /api/clients          # Create new client
-PUT    /api/clients/:id      # Update client
-DELETE /api/clients/:id      # Delete client
+Format code with Prettier:
+```bash
+npm run format
 ```
 
-#### Payments
-```
-GET    /api/payments                    # Get all payments
-GET    /api/payments/:id                # Get payment by ID
-GET    /api/payments/client/:clientId   # Get payments for client
-POST   /api/payments                    # Create new payment
-PUT    /api/payments/:id                # Update payment
-DELETE /api/payments/:id                # Delete payment
-```
+## Available Routes
 
-#### Release Forms
-```
-GET    /api/forms                    # Get all release forms
-GET    /api/forms/:id                # Get form by ID
-GET    /api/forms/client/:clientId   # Get form for client
-POST   /api/forms                    # Create new form
-PUT    /api/forms/:id                # Update form
-DELETE /api/forms/:id                # Delete form
-```
+- `/` - Home page
+- `/schedule` - Class schedule
+- `/boxing` - Boxing program details
+- `/muay-thai` - Muay Thai program details
+- `/mma` - MMA program details
+- `/brazilian-jiu-jitsu` - Brazilian Jiu-Jitsu program details
+- `/checkout` - Membership checkout (hidden route)
 
-For detailed API documentation, see [backend/README.md](backend/README.md)
+## API Endpoints
+
+For backend API documentation, see [backend/README.md](backend/README.md)
+
+Key endpoints include:
+- `/api/classes` - Class management
+- `/api/clients` - Client management
+- `/api/payments` - Payment processing
+- `/api/forms` - Release form handling
 
 ## Deployment
 
-This project is configured for deployment on Render.
+### Frontend (Vercel)
 
-See [DEPLOYMENT.md](DEPLOYMENT.md) for detailed deployment instructions.
+1. Install Vercel CLI:
+```bash
+npm install -g vercel
+```
 
-### Quick Deploy to Render
+2. Deploy:
+```bash
+vercel
+```
 
-1. Push code to GitHub
-2. Connect repository to Render
-3. Render will auto-detect `render.yaml` and set up:
-   - PostgreSQL database
-   - Node.js web service
-   - Environment variables
+Or connect your GitHub repository to Vercel for automatic deployments.
+
+### Backend (Render)
+
+See [DEPLOYMENT.md](DEPLOYMENT.md) for backend deployment instructions.
+
+## Environment Variables
+
+### Frontend (.env)
+- `VITE_API_URL` - Backend API URL
+- `VITE_STRIPE_PUBLIC_KEY` - Stripe public key for payments
+- `VITE_GA_TRACKING_ID` - Google Analytics tracking ID
+- `VITE_CONTACT_EMAIL` - Contact email address
+- `VITE_SITE_URL` - Site URL
+
+### Backend
+See `backend/.env.example` for backend environment variables.
 
 ## Current Status
 
@@ -161,56 +194,40 @@ See [DEPLOYMENT.md](DEPLOYMENT.md) for detailed deployment instructions.
 - ✅ Backend API structure
 - ✅ Database models (Classes, Clients, Payments, Release Forms)
 - ✅ RESTful API endpoints
+- ✅ Frontend React application
+- ✅ Responsive UI with Tailwind CSS
+- ✅ React Router setup
 - ✅ TypeScript configuration
-- ✅ CORS and middleware setup
-- ✅ Render deployment configuration
-- ✅ Mock data for testing
+- ✅ Deployment configurations (Vercel + Render)
 
 ### In Progress
-- 🔄 Database integration (currently using mocked data)
+- 🔄 Backend database integration (currently using mocked data)
+- 🔄 Frontend-backend API integration
 
 ### Planned
 - ⏳ Stripe payment integration
 - ⏳ AWS S3 for PDF storage
 - ⏳ Authentication/Authorization
-- ⏳ Frontend application
 - ⏳ Unit and integration tests
 - ⏳ CI/CD pipeline
-
-## Development Notes
-
-- Database operations are currently mocked for development
-- Look for `🔵 [MOCKED]` in console logs to identify mock operations
-- Replace mock data with actual database queries when ready
-- See `// TODO:` comments in model files for integration points
-
-## Environment Variables
-
-Required environment variables (see `backend/.env.example`):
-
-- `PORT` - Server port (default: 3000)
-- `NODE_ENV` - Environment (development/production)
-- `DATABASE_URL` - PostgreSQL connection string
-- `CORS_ORIGIN` - Allowed CORS origins
-
-Optional (for future features):
-- `STRIPE_SECRET_KEY` - Stripe API key
-- `AWS_*` - AWS S3 credentials
 
 ## Contributing
 
 1. Fork the repository
-2. Create a feature branch
-3. Make your changes
-4. Submit a pull request
+2. Create a feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
 
 ## License
 
-MIT
+This project is private and proprietary.
 
 ## Support
 
 For issues or questions:
+- Frontend: See this README
 - Backend API: See [backend/README.md](backend/README.md)
 - Deployment: See [DEPLOYMENT.md](DEPLOYMENT.md)
+- Contact: info@dallasmmaboxing.com
 - GitHub Issues: https://github.com/andyprevalsky/dallasmmaboxing/issues
