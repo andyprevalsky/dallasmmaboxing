@@ -1,5 +1,8 @@
 import { Request, Response } from 'express';
 import { PaymentModel } from '../models/Payment';
+import { ClientModel } from '../models/Client';
+import { ReleaseFormModel } from '../models/ReleaseForm';
+import { notificationService } from '../services/notificationService';
 
 export const getAllPayments = async (_req: Request, res: Response): Promise<void> => {
   try {
@@ -81,6 +84,41 @@ export const createPayment = async (req: Request, res: Response): Promise<void> 
       description,
     });
 
+    // Send notifications if payment is completed
+    if (status === 'completed') {
+      try {
+        // Get client information
+        const client = await ClientModel.findById(client_id);
+
+        if (client) {
+          // Get release form if available
+          const releaseForm = await ReleaseFormModel.findByClientId(client_id);
+
+          // Build confirmation URL (adjust domain as needed)
+          const confirmationUrl = `${process.env.FRONTEND_URL || 'http://localhost:5173'}/confirmation/${newPayment.id}`;
+
+          // Send notifications
+          await notificationService.sendPaymentConfirmationNotifications({
+            clientName: client.name,
+            clientEmail: client.email,
+            clientPhone: client.phone,
+            confirmationUrl,
+            releaseFormUrl: releaseForm?.signed_pdf_url,
+            paymentAmount: amount,
+            paymentId: newPayment.id,
+          });
+
+          console.log(`✅ Notifications sent for payment #${newPayment.id}`);
+        } else {
+          console.warn(`⚠️  Client not found for payment #${newPayment.id}`);
+        }
+      } catch (notificationError) {
+        // Log the error but don't fail the payment creation
+        console.error('Error sending notifications:', notificationError);
+        // Continue - payment was created successfully
+      }
+    }
+
     res.status(201).json({
       success: true,
       data: newPayment,
@@ -99,6 +137,9 @@ export const updatePayment = async (req: Request, res: Response): Promise<void> 
     const id = parseInt(req.params.id);
     const updateData = req.body;
 
+    // Get the old payment to check if status changed
+    const oldPayment = await PaymentModel.findById(id);
+
     const updatedPayment = await PaymentModel.update(id, updateData);
 
     if (!updatedPayment) {
@@ -107,6 +148,37 @@ export const updatePayment = async (req: Request, res: Response): Promise<void> 
         error: 'Payment not found',
       });
       return;
+    }
+
+    // Send notifications if status changed to completed
+    if (oldPayment && oldPayment.status !== 'completed' && updatedPayment.status === 'completed') {
+      try {
+        // Get client information
+        const client = await ClientModel.findById(updatedPayment.client_id);
+
+        if (client) {
+          // Get release form if available
+          const releaseForm = await ReleaseFormModel.findByClientId(updatedPayment.client_id);
+
+          // Build confirmation URL
+          const confirmationUrl = `${process.env.FRONTEND_URL || 'http://localhost:5173'}/confirmation/${updatedPayment.id}`;
+
+          // Send notifications
+          await notificationService.sendPaymentConfirmationNotifications({
+            clientName: client.name,
+            clientEmail: client.email,
+            clientPhone: client.phone,
+            confirmationUrl,
+            releaseFormUrl: releaseForm?.signed_pdf_url,
+            paymentAmount: updatedPayment.amount,
+            paymentId: updatedPayment.id,
+          });
+
+          console.log(`✅ Notifications sent for payment #${updatedPayment.id} (status update)`);
+        }
+      } catch (notificationError) {
+        console.error('Error sending notifications:', notificationError);
+      }
     }
 
     res.json({

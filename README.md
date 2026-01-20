@@ -10,6 +10,7 @@ This system provides:
 - **Client Management**: Track client information and memberships
 - **Payment Processing**: Handle payments via Stripe integration
 - **Release Forms**: Digital signing and storage of liability release forms
+- **Notification System**: Automated SMS and email notifications for payment confirmations
 
 ## Repository Structure
 
@@ -153,8 +154,10 @@ For backend API documentation, see [backend/README.md](backend/README.md)
 Key endpoints include:
 - `/api/classes` - Class management
 - `/api/clients` - Client management
-- `/api/payments` - Payment processing
+- `/api/payments` - Payment processing (with automated notifications)
 - `/api/forms` - Release form handling
+
+For detailed notification system documentation, see [backend/NOTIFICATION_SYSTEM.md](backend/NOTIFICATION_SYSTEM.md)
 
 ## Deployment
 
@@ -194,6 +197,7 @@ See `backend/.env.example` for backend environment variables.
 - ✅ Backend API structure
 - ✅ Database models (Classes, Clients, Payments, Release Forms)
 - ✅ RESTful API endpoints
+- ✅ Notification system (SMS & Email with mock services)
 - ✅ Frontend React application
 - ✅ Responsive UI with Tailwind CSS
 - ✅ React Router setup
@@ -207,6 +211,8 @@ See `backend/.env.example` for backend environment variables.
 ### Planned
 - ⏳ Stripe payment integration
 - ⏳ AWS S3 for PDF storage
+- ⏳ Production SMS service (Twilio) integration
+- ⏳ Production Email service (SendGrid/AWS SES) integration
 - ⏳ Authentication/Authorization
 - ⏳ Unit and integration tests
 - ⏳ CI/CD pipeline
