@@ -3,6 +3,29 @@ import { ClassSchedule, MembershipPlan } from '../types'
 export const SITE_NAME = 'Dallas MMA Boxing'
 export const SITE_TAGLINE = 'Premier Martial Arts Training in Dallas, Texas'
 
+export const CONTACT_INFO = {
+  address: '612 Valley Ranch Pkwy S',
+  city: 'Irving',
+  state: 'Texas',
+  zip: '75063',
+  phone: '972-977-5605',
+  email: 'georgeprevalsky@gmail.com',
+  fullAddress: '612 Valley Ranch Pkwy S, Irving, Texas 75063',
+}
+
+export const SOCIAL_MEDIA = {
+  facebook: 'https://www.facebook.com/dallasmmaboxing',
+  instagram: 'https://www.instagram.com/dallasmmaboxing',
+  yelp: 'https://www.yelp.com/biz/dallas-mma-boxing',
+}
+
+export const GYM_INFO = {
+  established: 1996,
+  yearsTeaching: 20,
+  facilitySize: '6,000 sq ft',
+  location: 'DFW Area',
+}
+
 export const NAVIGATION_LINKS = [
   { name: 'Home', path: '/' },
   { name: 'Schedule', path: '/schedule' },
