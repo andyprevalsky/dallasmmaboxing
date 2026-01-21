@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import { SITE_NAME, NAVIGATION_LINKS, CONTACT_INFO, SOCIAL_MEDIA, GYM_INFO } from '../utils/constants'
+import { SITE_NAME, NAVIGATION_LINKS, CONTACT_INFO, SOCIAL_MEDIA, GYM_INFO, OPERATING_HOURS } from '../utils/constants'
 
 const Footer = () => {
   const currentYear = new Date().getFullYear()
@@ -12,11 +12,11 @@ const Footer = () => {
           <div>
             <h3 className="text-lg font-bold mb-4">{SITE_NAME}</h3>
             <p className="text-gray-400 text-sm mb-4">
-              Premier martial arts training facility in the DFW area since {GYM_INFO.established}.
-              Transform your body, master your mind, and unleash your potential.
+              A Muay Thai and Boxing Gym located in the center of the DFW area since {GYM_INFO.established}.
+              Your Success is Our Goal.
             </p>
             <p className="text-gray-400 text-sm font-semibold">
-              {GYM_INFO.facilitySize} Facility
+              Purpose-Built {GYM_INFO.facilitySize} Facility
             </p>
           </div>
 
@@ -107,9 +107,11 @@ const Footer = () => {
             </div>
             <div className="text-gray-400 text-sm">
               <p className="font-semibold mb-2">Hours</p>
-              <p>Mon-Fri: 6:00 AM - 10:00 PM</p>
-              <p>Sat: 8:00 AM - 8:00 PM</p>
-              <p>Sun: 9:00 AM - 6:00 PM</p>
+              <p className="text-xs">Mon & Wed: {OPERATING_HOURS.monday.open} - {OPERATING_HOURS.monday.close}</p>
+              <p className="text-xs">Tue & Thu: {OPERATING_HOURS.tuesday.open} - {OPERATING_HOURS.tuesday.close}</p>
+              <p className="text-xs">Fri: {OPERATING_HOURS.friday.open} - {OPERATING_HOURS.friday.close}</p>
+              <p className="text-xs">Sat: {OPERATING_HOURS.saturday.open} - {OPERATING_HOURS.saturday.close}</p>
+              <p className="text-xs">Sun: {OPERATING_HOURS.sunday}</p>
             </div>
           </div>
         </div>

@@ -1,7 +1,7 @@
 import { ClassSchedule, MembershipPlan } from '../types'
 
-export const SITE_NAME = 'Dallas MMA Boxing'
-export const SITE_TAGLINE = 'Premier Martial Arts Training in Dallas, Texas'
+export const SITE_NAME = 'George Prevalsky Gym'
+export const SITE_TAGLINE = 'Boxing, Muay Thai, Brazilian Jiu-Jitsu and MMA'
 
 export const CONTACT_INFO = {
   address: '612 Valley Ranch Pkwy S',
@@ -24,6 +24,18 @@ export const GYM_INFO = {
   yearsTeaching: 20,
   facilitySize: '6,000 sq ft',
   location: 'DFW Area',
+  mission: 'Your Success is Our Goal',
+  description: 'A Muay Thai and Boxing Gym located in the center of the DFW area. Founded in 1996, we have maintained continuous operations for over two decades, serving both competitive and recreational athletes.',
+}
+
+export const OPERATING_HOURS = {
+  monday: { open: '5:30 PM', close: '9:15 PM' },
+  tuesday: { open: '11:30 AM', close: '9:15 PM' },
+  wednesday: { open: '5:30 PM', close: '9:15 PM' },
+  thursday: { open: '11:30 AM', close: '9:15 PM' },
+  friday: { open: '5:30 PM', close: '7:45 PM' },
+  saturday: { open: '9:30 AM', close: '2:30 PM' },
+  sunday: 'Closed',
 }
 
 export const NAVIGATION_LINKS = [
@@ -32,6 +44,7 @@ export const NAVIGATION_LINKS = [
   { name: 'Boxing', path: '/boxing' },
   { name: 'Muay Thai', path: '/muay-thai' },
   { name: 'MMA', path: '/mma' },
+  { name: 'Wrestling', path: '/wrestling' },
   { name: 'Brazilian Jiu-Jitsu', path: '/brazilian-jiu-jitsu' },
 ]
 

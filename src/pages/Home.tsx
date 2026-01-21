@@ -4,32 +4,38 @@ import { NAVIGATION_LINKS, GYM_INFO, CONTACT_INFO } from '../utils/constants'
 import { Link } from 'react-router-dom'
 
 const Home = () => {
-  const disciplines = NAVIGATION_LINKS.slice(2, 6) // Boxing, Muay Thai, MMA, BJJ
+  const disciplines = NAVIGATION_LINKS.slice(2, 7) // Boxing, Muay Thai, MMA, Wrestling, BJJ
 
   return (
     <div>
       <Hero
-        title="Dallas MMA Boxing"
-        subtitle="Transform Your Body. Master Your Mind. Unleash Your Potential."
-        ctaText="Start Your Journey"
+        title="GEORGE PREVALSKY GYM"
+        subtitle="Boxing, Muay Thai, Brazilian Jiu-Jitsu and MMA"
+        ctaText="View Schedule"
         ctaLink="/schedule"
       />
 
       {/* About Section */}
       <section className="py-16 px-4 bg-white">
         <div className="max-w-4xl mx-auto">
-          <h2 className="text-center mb-8">About Dallas MMA Boxing</h2>
+          <h2 className="text-center mb-8">About George Prevalsky Gym</h2>
           <div className="prose prose-lg max-w-none">
+            <p className="text-gray-700 text-center mb-6 text-xl font-semibold text-primary-600">
+              {GYM_INFO.mission}
+            </p>
             <p className="text-gray-700 text-center mb-8 text-lg leading-relaxed">
-              Established in <strong>{GYM_INFO.established}</strong>, Dallas MMA Boxing has been serving the {GYM_INFO.location}
-              with over <strong>{GYM_INFO.yearsTeaching} years of quality martial arts instruction</strong>. Our state-of-the-art{' '}
-              <strong>{GYM_INFO.facilitySize} facility</strong> in Irving, Texas is equipped with everything you need
-              to reach your fitness and martial arts goals.
+              {GYM_INFO.description}
+            </p>
+            <p className="text-gray-700 text-center mb-8 text-lg leading-relaxed">
+              In 2010, we relocated to a purpose-built <strong>{GYM_INFO.facilitySize} facility</strong>, designed and built from
+              the ground up to be a high-quality Muay Thai and Boxing gym. Our mission is to become{' '}
+              <strong>the number one stand-up striking training center in the DFW area</strong>.
             </p>
             <p className="text-gray-700 text-center text-lg leading-relaxed">
-              We offer comprehensive programs in <strong>Muay Thai, Boxing, MMA, Wrestling, and Brazilian Jiu-Jitsu</strong>,
-              taught by experienced instructors who are passionate about helping you succeed. Whether you're a complete
-              beginner or an experienced athlete, our welcoming community is here to support your journey.
+              We welcome everyone - whether you're training for <strong>fitness</strong>, learning <strong>self-defense</strong>,
+              or competing as an <strong>amateur or professional athlete</strong>. We offer comprehensive programs in{' '}
+              <strong>Muay Thai, Boxing, MMA, Wrestling, and Brazilian Jiu-Jitsu</strong>, featuring some of the most
+              experienced instructors in the area.
             </p>
           </div>
         </div>
@@ -55,7 +61,7 @@ const Home = () => {
       {/* Why Choose Us */}
       <section className="py-16 px-4 bg-white">
         <div className="max-w-7xl mx-auto">
-          <h2 className="text-center mb-12">Why Choose Dallas MMA Boxing?</h2>
+          <h2 className="text-center mb-12">Why Choose George Prevalsky Gym?</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <div className="text-center p-6 rounded-lg hover:shadow-lg transition-shadow">
               <div className="w-16 h-16 bg-primary-100 rounded-full flex items-center justify-center mx-auto mb-4">
@@ -63,10 +69,10 @@ const Home = () => {
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
                 </svg>
               </div>
-              <h3 className="mb-4">Expert Instructors</h3>
+              <h3 className="mb-4">Most Experienced Instructors</h3>
               <p className="text-gray-600">
-                Learn from certified professionals with over {GYM_INFO.yearsTeaching} years of teaching experience
-                and real competition backgrounds
+                Some of the most experienced instructors in the DFW area for Wrestling and Brazilian Jiu-Jitsu,
+                plus expert coaching in Muay Thai, Boxing, and MMA
               </p>
             </div>
             <div className="text-center p-6 rounded-lg hover:shadow-lg transition-shadow">
@@ -75,10 +81,10 @@ const Home = () => {
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
                 </svg>
               </div>
-              <h3 className="mb-4">{GYM_INFO.facilitySize} Facility</h3>
+              <h3 className="mb-4">Purpose-Built {GYM_INFO.facilitySize} Facility</h3>
               <p className="text-gray-600">
-                Train in a spacious, modern facility equipped with professional-grade equipment,
-                full-size rings, and premium training areas
+                Our facility was designed and built from the ground up to be a high-quality Muay Thai and Boxing gym,
+                equipped with professional-grade equipment and training areas
               </p>
             </div>
             <div className="text-center p-6 rounded-lg hover:shadow-lg transition-shadow">
@@ -89,8 +95,8 @@ const Home = () => {
               </div>
               <h3 className="mb-4">Established Since {GYM_INFO.established}</h3>
               <p className="text-gray-600">
-                Join a trusted community with nearly 30 years of excellence in martial arts training.
-                We've helped thousands achieve their goals
+                Over {GYM_INFO.yearsTeaching} years of continuous operations, serving both competitive and recreational
+                athletes in the DFW area
               </p>
             </div>
           </div>
@@ -135,6 +141,10 @@ const Home = () => {
                     Address
                   </h3>
                   <p className="text-gray-700 ml-8">{CONTACT_INFO.fullAddress}</p>
+                  <p className="text-gray-600 text-sm ml-8 mt-2">
+                    Southeast corner of MacArthur Blvd & Valley Ranch Parkway South, next to Discount Tire and behind CVS.
+                    Approximately 2 blocks north of I-635.
+                  </p>
                 </div>
                 <div>
                   <h3 className="mb-3 flex items-center">

@@ -4,6 +4,7 @@ import Schedule from './pages/Schedule'
 import Boxing from './pages/Boxing'
 import MuayThai from './pages/MuayThai'
 import MMA from './pages/MMA'
+import Wrestling from './pages/Wrestling'
 import BrazilianJiuJitsu from './pages/BrazilianJiuJitsu'
 import Checkout from './pages/Checkout'
 import Header from './components/Header'
@@ -21,6 +22,7 @@ function App() {
             <Route path="/boxing" element={<Boxing />} />
             <Route path="/muay-thai" element={<MuayThai />} />
             <Route path="/mma" element={<MMA />} />
+            <Route path="/wrestling" element={<Wrestling />} />
             <Route path="/brazilian-jiu-jitsu" element={<BrazilianJiuJitsu />} />
             <Route path="/checkout" element={<Checkout />} />
           </Routes>

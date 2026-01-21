@@ -10,6 +10,7 @@ const Schedule = ({ schedules }: ScheduleProps) => {
       Boxing: 'bg-red-100 text-red-800',
       'Muay Thai': 'bg-blue-100 text-blue-800',
       MMA: 'bg-purple-100 text-purple-800',
+      Wrestling: 'bg-orange-100 text-orange-800',
       'Brazilian Jiu-Jitsu': 'bg-green-100 text-green-800',
     }
     return colors[discipline] || 'bg-gray-100 text-gray-800'
