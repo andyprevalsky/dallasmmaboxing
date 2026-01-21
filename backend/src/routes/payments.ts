@@ -6,7 +6,11 @@ import {
   createPayment,
   updatePayment,
   deletePayment,
+  createCheckout,
+  confirmPayment,
+  handleStripeWebhook,
 } from '../controllers/paymentController';
+import { validateRequest, checkoutSchema, paymentConfirmationSchema } from '../middleware/validation';
 
 const router = Router();
 
@@ -27,5 +31,14 @@ router.put('/:id', updatePayment);
 
 // DELETE /api/payments/:id - Delete a payment
 router.delete('/:id', deletePayment);
+
+// POST /api/payments/checkout - Create a checkout session (integrates with frontend /checkout route)
+router.post('/checkout', validateRequest(checkoutSchema), createCheckout);
+
+// POST /api/payments/confirm - Confirm a payment after Stripe success
+router.post('/confirm', validateRequest(paymentConfirmationSchema), confirmPayment);
+
+// POST /api/payments/webhook - Stripe webhook endpoint (no auth required)
+router.post('/webhook', handleStripeWebhook);
 
 export default router;
